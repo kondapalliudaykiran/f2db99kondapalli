@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  - var result = [{"truck_name":"mahindra","truck_size":400,"truck_type":"goods"},{"truck_name":"tata","truck_size":200,"truck_type":"tipper"},{"truck_name":"swaraj","truck_size":260,"truck_type":"agriculture"}]
+  div.container-fluid
+     div.row
+        each item,index in result
+            div.col-sm-2(onclick=`buy(${index})`) truck  Name: #{item["truck_name"]}  <br>  truck_size: #{item["truck_size"]} <br> truck_type: #{item["truck_type"]} 
+  script.
+      function buy(index){
+         alert("you purchased item "+(index+1))
+      }
