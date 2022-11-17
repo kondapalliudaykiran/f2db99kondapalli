@@ -1,0 +1,22 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let truckid = toShow._id 
+  - let truck_name = toShow.truck_name 
+  - let truck_type = toShow.truck_type
+  - let truck_size = toShow.truck_size 
+  div 
+    div.row 
+      div(class='truckAttr mr-3') truck ID is: 
+      div #{truckid} 
+    div.row 
+      div(class='truckAttr mr-3') truck name is: benz
+      div #{truck_name} 
+    div.row 
+      div(class='truckAttr mr-3') truck type is: goods
+      div #{truck_type} 
+    div.row 
+      div(class='truckAttr mr-3') truck size is: 200
+      div #{truck_size}

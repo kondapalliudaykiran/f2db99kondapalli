@@ -1,0 +1,50 @@
+extends layout 
+ 
+block content 
+  h1(style="text-align: left; color:green")= title
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let truckid = toShow._id 
+    - let truck_name = toShow.truck_name
+    - let truck_type = toShow.truck_type
+    - let truck_size = toShow.truck_size 
+    - let actionid = "/resource/truck/" + truckid 
+    script let actionid = "#{actionid}" 
+    div 
+      div.row 
+        div(class='truckAttr mr-3') truck ID is: 
+        div #{truckid} 
+      div.row 
+        div(class='truckAttr mr-3') truck Type is: 
+        div #{truck_type} 
+      div.row 
+        div(class='truckAttr mr-3') truck Size is: 
+        div #{truck_size} 
+ 
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the truck collection 
+      window.location.href='/trucks' 
+    } 
+  script. 
+    function deleteOnid() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, { 
+        method: 'DELETE'      
+      }).then((resp) => { 
+        return resp.json(); 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/trucks' 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Delete failed " + error ) 
+      }); 
+    } 

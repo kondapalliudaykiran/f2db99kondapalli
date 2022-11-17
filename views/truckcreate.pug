@@ -1,0 +1,35 @@
+extends layout 
+ 
+block content 
+  h1(style="text-align: left; color:green")= title
+ 
+  form(id='truckForm', action="/resource/truck", method="POST") 
+    div.form-group 
+        label.truckAttr(for='truck_name') truck name
+        input#truck_name(type='text', name='truck_name') 
+    div.form-group 
+        label.truckAttr(for='truck_type') truck type 
+        input#truck_type(type='text', name='truck_type') 
+    div.form-group 
+        label.truckAttr(for='truck_size') truck size 
+        input#truck_size(type='number', name='truck_size') 
+    input(class='btn-btn-info' type="submit") 
+ 
+  script. 
+    document.forms['truckForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'POST', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Save succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Save failed " + error ) 
+      }); 
+    }); 
+ 
