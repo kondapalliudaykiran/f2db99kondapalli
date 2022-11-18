@@ -29,7 +29,7 @@ block content
   script. 
     function cancel() { 
       // Go back to the home page for the truck collection 
-      window.location.href='/trucks' 
+      window.location.href='/truck' 
     } 
   script. 
     function deleteOnid() { 
@@ -41,7 +41,7 @@ block content
         return resp.json(); 
       }).then((body) => { 
         alert("Delete succeded") 
-        window.location.href='/trucks' 
+        window.location.href='/truck' 
         // TODO handle body 
       }).catch((error) => { 
         // TODO handle error 
