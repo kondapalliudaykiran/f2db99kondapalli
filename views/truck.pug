@@ -3,6 +3,9 @@ extends layout
 block content
   div(class='container')
         h1(style="text-align: center; color: #863A6F")= title
+        a(href='/truck/create')
+          button.btn(class="btn btn-info", style="margin: 5px; width: 130px;", onclick= destination) Create
+
         - var results = results
         div(class='container' style="text-align: center;")  
             div.row 
@@ -11,8 +14,12 @@ block content
                         div(class='card', style='width: 17rem;')
                             div(class='card-body')
                                 - let destination = `dispatch(\"/truck/update?id=${item._id}\")`
+                                - let detailviews = `dispatch(\"/truck/detail?id=${item._id}\")`
+                                - let deleteviews = `dispatch(\"/truck/delete?id=${item._id}\")`
                                 div(class='card-text', onclick=`buy(${index})`) Name: #{item["truck_name"]}  <br>  truck_size: #{item["truck_size"]} <br> truck_type: #{item["truck_type"]} 
                                 button.btn(class="btn btn-primary btn-sm ml-1", style="margin: 5px; width: 130px;", onclick= destination) Update
+                                button.btn(class="btn btn-primary btn-sm ml-1", style="margin: 5px; width: 130px;", onclick= detailviews) Details
+                                button.btn(class="btn btn-primary btn-sm ml-1", style="margin: 5px; width: 130px;", onclick= deleteviews) Delete
   script.
       function buy(index){
          alert("you purchased item "+(index+1))
@@ -20,16 +27,4 @@ block content
       function dispatch(path) {
             window.location.href = path;
       }
-      passport.use(new LocalStrategy( 
-  function(username, password, done) { 
-    Account.findOne({ username: username }, function (err, user) { 
-      if (err) { return done(err); } 
-      if (!user) { 
-        return done(null, false, { message: 'Incorrect username.' }); 
-      } 
-      if (!user.validPassword(password)) { 
-        return done(null, false, { message: 'Incorrect password.' }); 
-      } 
-      return done(null, user); 
-    }); 
-  } 
+      
